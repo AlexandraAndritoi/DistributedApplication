@@ -5,7 +5,7 @@
  */
 package distributtedapp;
 
-import distributtedapp.databsemanager.MySQLJDBCUtil;
+import distributtedapp.databasemanager.MySQLJDBCUtil;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
