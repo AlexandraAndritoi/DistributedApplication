@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package distributtedapp;
+package distributedapp;
 
 import distributtedapp.databasemanager.MySQLJDBCUtil;
 import java.sql.Connection;
@@ -15,7 +15,7 @@ import java.sql.Statement;
  *
  * @author Alexandra
  */
-public class DistributtedApp {
+public class DistributedApp {
 
     /**
      * @param args the command line arguments
