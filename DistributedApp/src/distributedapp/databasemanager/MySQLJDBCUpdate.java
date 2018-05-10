@@ -3,12 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package distributtedapp.databasemanager;
+package distributedapp.databasemanager;
 
 /**
  *
  * @author Alexandra
  */
-public class MySQLJDBCRemove {
+public class MySQLJDBCUpdate {
     
 }
