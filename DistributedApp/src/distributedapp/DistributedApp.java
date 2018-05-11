@@ -28,7 +28,9 @@ public class DistributedApp {
      */
     public static void main(String[] args) {
         
-        System.setProperty("java.security.policy","D:\\An 3\\PAD\\DistributedApplication\\DistributedApp\\src\\distributedapp\\java.policy");
+        System.setProperty("java.security.policy",
+                "D:\\An 3\\PAD\\DistributedApplication\\"
+                        + "DistributedApp\\src\\distributedapp\\java.policy");
         System.setProperty("java.rmi.server.hostname","10.20.0.137");
         
         try (Connection conn = MySQLJDBCUtil.getConnection();
@@ -52,7 +54,8 @@ public class DistributedApp {
 	    registry.bind("ServerManagerInterface", server);
             //Naming.rebind("//localhost/ServerManagerInterface", server);
             
-            System.out.println("distributedapp.DistributedApp.main() Server is ready to listen...");
+            System.out.println("distributedapp.DistributedApp.main() "
+                    + "Server is ready to listen...");
             
         }catch(Exception e){
             System.err.println("Server Manager Error: " + e.getMessage());
