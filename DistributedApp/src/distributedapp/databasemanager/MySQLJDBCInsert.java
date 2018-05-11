@@ -12,20 +12,22 @@ import distributedapp.servermanager.interfaces.User;
  * @author Alexandra
  */
 public class MySQLJDBCInsert {
-    private static MySQLJDBCInsert object = null;
+    private static MySQLJDBCInsert insertionObject = null;
     
     private MySQLJDBCInsert(){
         
     }
     
     public void insertUser(User  user){
-        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() Serializable object is ready to be inserted...");
-        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() user's address" + user.getAddress());
+        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() "
+                + "Serializable object is ready to be inserted...");
+        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() "
+                + "user's address" + user.getAddress());
     }
     
     public static MySQLJDBCInsert getMySQLJDBCInsert(){
-        if(object == null)
-            object = new MySQLJDBCInsert();
-        return object;
+        if(insertionObject == null)
+            insertionObject = new MySQLJDBCInsert();
+        return insertionObject;
     }
 }
