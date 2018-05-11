@@ -14,9 +14,9 @@ import java.rmi.RemoteException;
  */
 public interface ServerManagerInterface extends Remote {
     
-    public void insertUser() throws RemoteException;
-    public User getUser(int id) throws RemoteException;
-    public void updateUser(int id) throws RemoteException;
+    public void insertUser(User user) throws RemoteException;
+    public User getUser(String username) throws RemoteException;
+    public void updateUser(String username) throws RemoteException;
     
     public Product getProduct() throws RemoteException;
     

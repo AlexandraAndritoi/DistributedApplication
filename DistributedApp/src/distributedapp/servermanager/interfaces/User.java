@@ -6,7 +6,6 @@
 package distributedapp.servermanager.interfaces;
 
 import java.io.Serializable;
-import java.sql.Date;
 
 /**
  *
@@ -14,7 +13,7 @@ import java.sql.Date;
  */
 public class User implements Serializable {
 
-    public User(int id, String firstName, String lastName, String email, String username, String password, String phone, String address, String country, String zipcode, Date birthdate) {
+    public User(int id, String firstName, String lastName, String email, String username, String password, String phone, String address, String country, String zipcode, String birthdate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -27,6 +26,9 @@ public class User implements Serializable {
         this.zipcode = zipcode;
         this.birthdate = birthdate;
     }
+    
+    private static final long serialVersionUID = 1L;
+    
     private int id;
     private String firstName;
     private String lastName;
@@ -37,7 +39,7 @@ public class User implements Serializable {
     private String address;
     private String country;
     private String zipcode;
-    private Date birthdate;
+    private String birthdate;
     
     public void setId(int id){
         this.id = id;
@@ -79,7 +81,7 @@ public class User implements Serializable {
         this.zipcode = zipcode;
     }
 
-    public void setBirthdate(Date birthdate) {
+    public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
     }
 
@@ -123,7 +125,7 @@ public class User implements Serializable {
         return zipcode;
     }
 
-    public Date getBirthdate() {
+    public String getBirthdate() {
         return birthdate;
     }
 }
