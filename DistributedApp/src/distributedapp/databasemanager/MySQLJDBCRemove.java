@@ -10,5 +10,15 @@ package distributedapp.databasemanager;
  * @author Alexandra
  */
 public class MySQLJDBCRemove {
+    private static MySQLJDBCRemove removingObject = null;
     
+    private MySQLJDBCRemove(){
+        
+    }
+    
+    public static MySQLJDBCRemove getMySQLJDBCRemove(){
+        if(removingObject == null)
+            removingObject = new MySQLJDBCRemove();
+        return removingObject;
+    }
 }
