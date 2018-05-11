@@ -13,8 +13,7 @@ import java.io.Serializable;
  */
 public class User implements Serializable {
 
-    public User(int id, String firstName, String lastName, String email, String username, String password, String phone, String address, String country, String zipcode, String birthdate) {
-        this.id = id;
+    public User(String firstName, String lastName, String email, String username, String password, String phone, String address, String country, String zipcode, String birthdate) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
@@ -29,7 +28,6 @@ public class User implements Serializable {
     
     private static final long serialVersionUID = 1L;
     
-    private int id;
     private String firstName;
     private String lastName;
     private String email;
@@ -40,10 +38,6 @@ public class User implements Serializable {
     private String country;
     private String zipcode;
     private String birthdate;
-    
-    public void setId(int id){
-        this.id = id;
-    }
     
     public void setFirstName(String firstName){
         this.firstName = firstName;
@@ -83,10 +77,6 @@ public class User implements Serializable {
 
     public void setBirthdate(String birthdate) {
         this.birthdate = birthdate;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getFirstName() {
