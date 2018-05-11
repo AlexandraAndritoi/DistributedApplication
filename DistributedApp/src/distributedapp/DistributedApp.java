@@ -29,7 +29,7 @@ public class DistributedApp {
     public static void main(String[] args) {
         
         System.setProperty("java.security.policy","D:\\An 3\\PAD\\DistributedApplication\\DistributedApp\\src\\distributedapp\\java.policy");
-        System.setProperty("java.rmi.server.hostname","192.168.43.8");
+        System.setProperty("java.rmi.server.hostname","10.20.0.137");
         
         try (Connection conn = MySQLJDBCUtil.getConnection();
                Statement stmt = conn.createStatement()) {

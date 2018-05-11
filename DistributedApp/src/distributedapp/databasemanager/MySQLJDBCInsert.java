@@ -20,7 +20,7 @@ public class MySQLJDBCInsert {
     
     public void insertUser(User  user){
         System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() Serializable object is ready to be inserted...");
-        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() " + user.getAddress());
+        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertUser() user's address" + user.getAddress());
     }
     
     public static MySQLJDBCInsert getMySQLJDBCInsert(){

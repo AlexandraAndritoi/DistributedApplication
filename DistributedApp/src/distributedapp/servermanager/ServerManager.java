@@ -25,7 +25,7 @@ public class ServerManager extends UnicastRemoteObject implements ServerManagerI
         
         MySQLJDBCInsert insertObject = MySQLJDBCInsert.getMySQLJDBCInsert();
         
-        if(insertObject != null) System.out.println("distributedapp.servermanager.ServerManager.insertUser() Inseration object is not null!");
+        if(insertObject != null) System.out.println("distributedapp.servermanager.ServerManager.insertUser() Insertion object is not null!");
         
         insertObject.insertUser(user);
     }
