@@ -7,6 +7,7 @@ package distributedapp.servermanager.interfaces;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import java.util.ArrayList;
 
 /**
  *
@@ -21,9 +22,9 @@ public interface ServerManagerInterface extends Remote {
     public String getFirstName(String username, String password) 
             throws RemoteException;
     
-    public void updateUser(String username) throws RemoteException;
+    public String updateUser(User user) throws RemoteException;
     
-    public Product getProduct() throws RemoteException;
+    public void sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) throws RemoteException;
     
     public void sendMessage(String s) throws RemoteException;
     

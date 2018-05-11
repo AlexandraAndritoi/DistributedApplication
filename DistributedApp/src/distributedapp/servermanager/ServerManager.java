@@ -7,11 +7,12 @@ package distributedapp.servermanager;
 
 import distributedapp.databasemanager.MySQLJDBCInsert;
 import distributedapp.databasemanager.MySQLJDBCSelect;
-import distributedapp.servermanager.interfaces.Product;
+import distributedapp.servermanager.interfaces.CartItemBean;
 import distributedapp.servermanager.interfaces.ServerManagerInterface;
 import distributedapp.servermanager.interfaces.User;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.ArrayList;
 
 /**
  *
@@ -42,26 +43,34 @@ public class ServerManager extends UnicastRemoteObject
     
     @Override
     public String getFirstName(String username, String password) throws RemoteException {
-        /*
+        
         MySQLJDBCSelect selectionObject = MySQLJDBCSelect.getMySQLJDBCSelect();
         
         System.out.println("distributedapp.servermanager.ServerManager.getFirstName()"
                 + "Request from client received...");
         
         return selectionObject.selectFirstName();
-        */
-        
-        return "Test message for getFirstName() method";
     }
 
     @Override
-    public void updateUser(String username) throws RemoteException {
+    public String updateUser(User user) throws RemoteException {
+        System.out.println("distributedapp.servermanager.ServerManager.updateUser(): "
+                + "User data received...");
+        System.out.println("distributedapp.servermanager.ServerManager.updateUser(): "
+                + user.getFirstName());
         
+        return "Updated User";
     }
 
     @Override
-    public Product getProduct() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public void sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) 
+        throws RemoteException {
+        System.out.println("distributedapp.servermanager.ServerManager.sendCart(): "
+                + "Cart received...");
+        System.out.println("distributedapp.servermanager.ServerManager.sendCart(): "
+                + cart.get(0).getTitle());
+        System.out.println("distributedapp.servermanager.ServerManager.sendCart(): "
+                + cart.size());
     }
 
     @Override
