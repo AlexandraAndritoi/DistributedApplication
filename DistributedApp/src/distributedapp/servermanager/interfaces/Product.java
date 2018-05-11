@@ -12,6 +12,15 @@ import java.io.Serializable;
  * @author Alexandra
  */
 public class Product implements Serializable{
+
+    public Product(int id, String category, String description, String name, double price, String image) {
+        this.id = id;
+        this.category = category;
+        this.description = description;
+        this.name = name;
+        this.price = price;
+        this.image = image;
+    }
 	private int id;
 	private String category;
 	private String description;

@@ -13,6 +13,20 @@ import java.sql.Date;
  * @author Alexandra
  */
 public class User implements Serializable {
+
+    public User(int id, String firstName, String lastName, String email, String username, String password, String phone, String address, String country, String zipcode, Date birthdate) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.phone = phone;
+        this.address = address;
+        this.country = country;
+        this.zipcode = zipcode;
+        this.birthdate = birthdate;
+    }
     private int id;
     private String firstName;
     private String lastName;
@@ -112,6 +126,4 @@ public class User implements Serializable {
     public Date getBirthdate() {
         return birthdate;
     }
-    
-    
 }
