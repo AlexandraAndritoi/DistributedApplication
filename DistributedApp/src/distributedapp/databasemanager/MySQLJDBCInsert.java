@@ -114,19 +114,20 @@ public class MySQLJDBCInsert {
         return cutomerID;
     }
     
-    public int insertOrder(int customerID, double totalPrice){
+    public int insertOrder(int customerID, double totalPrice, String address){
         System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertOrder(): "
                 + "Ordered ready to be inserted...");
         
         ResultSet rs = null;
         int orderID = 0;
         
-        String sql = "INSERT INTO orders(customer_id,total) VALUES(?,?)";
+        String sql = "INSERT INTO orders(customer_id,total,address) VALUES(?,?,?)";
         
         try(Connection conn = MySQLJDBCUtil.getConnection();
                 PreparedStatement pstmt = conn.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);){
             pstmt.setInt(1,customerID);
             pstmt.setDouble(2, totalPrice);
+            pstmt.setString(3, address);
             
             int rowAffected = pstmt.executeUpdate();
             if(rowAffected == 1){
@@ -207,6 +208,12 @@ public class MySQLJDBCInsert {
         System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertCart(): "
                 + "user's ID: " + userID);
         
+        // get user's address
+        String userAddress = selectionObject.selectUserAddress(userID);
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertCart(): "
+                + "user's address: " + userAddress);
+        
         //insert new entry in customer table
         int customerID = this.insertCustomer(userID);
         
@@ -214,7 +221,7 @@ public class MySQLJDBCInsert {
                 + "customer's ID: " + customerID);
         
         //insert new entry in orders table
-        int orderID = this.insertOrder(customerID, totalPrice);
+        int orderID = this.insertOrder(customerID, totalPrice, userAddress);
         
         System.out.println("distributedapp.databasemanager.MySQLJDBCInsert.insertCart(): "
                 + "order ID: " + orderID);

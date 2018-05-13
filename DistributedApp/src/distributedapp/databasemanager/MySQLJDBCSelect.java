@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 
 /**
@@ -218,6 +219,63 @@ public class MySQLJDBCSelect {
         }
         
         return stock;
+    }
+    
+    public String selectUserAddress(int userID){
+        String sql = "SELECT address FROM user WHERE id = ?";
+        
+        ResultSet rs = null;
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUserAddress(): "
+                + sql);
+        
+        String userAddress = "";
+        
+        try (Connection conn = MySQLJDBCUtil.getConnection();
+            PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, userID);
+            
+            rs    = pstmt.executeQuery();
+            
+            if(rs.next())
+                userAddress = rs.getString("address");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally{
+            try{
+                if(rs != null)  rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        return userAddress;
+    }
+    
+    public ArrayList<String> selectOrderIDAndAddress(){
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectOrderData(): "
+                + "Order ID and Address ready to be selected...");
+        
+        String sql = "SELECT id,address FROM orders";
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectOrderIDAndAddress(): "
+                + sql);
+        
+        ArrayList<String> orderIDAndAddressList = new ArrayList<String>();
+        
+        try (Connection conn = MySQLJDBCUtil.getConnection();
+                Statement stmt  = conn.createStatement();
+                ResultSet rs    = stmt.executeQuery(sql)) {
+            
+            while(rs.next())
+                orderIDAndAddressList.add(rs.getInt("id") + " " + rs.getString("address"));
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } 
+        return orderIDAndAddressList;
+        
     }
     
     public static MySQLJDBCSelect getMySQLJDBCSelect(){

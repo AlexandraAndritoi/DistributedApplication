@@ -6,6 +6,7 @@
 package distributedapp;
 
 import ServerSide.GetProvider;
+import distributedapp.databasemanager.MySQLJDBCSelect;
 import distributedapp.databasemanager.MySQLJDBCUtil;
 import distributedapp.servermanager.ServerManager;
 import distributedapp.servermanager.interfaces.ServerManagerInterface;
@@ -16,6 +17,7 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.rmi.*;
+import java.util.ArrayList;
 
 /**
  *
@@ -71,7 +73,26 @@ public class DistributedApp {
             System.out.println("distributedapp.DistributedApp.main(): "
                     + "Provider ok...");
             
-            String providerAnswer = provider.getProvider(10, "Timisoara");
+            MySQLJDBCSelect selectionObject = MySQLJDBCSelect.getMySQLJDBCSelect();
+            
+            ArrayList<String> orderIDAndAddressList = selectionObject.selectOrderIDAndAddress();
+            String orderAddress = null;
+            ArrayList<Integer> orderIDList = new ArrayList<Integer>();
+            String providerAnswer = null;
+            
+            for(int i=0; i<orderIDAndAddressList.size(); i++){
+                orderIDList.add(Integer.parseInt(orderIDAndAddressList.get(i).split(" ")[0]));
+                orderAddress = orderIDAndAddressList.get(i).split(" ")[1];
+                
+                providerAnswer = provider.getProvider(orderIDList.get(i), orderAddress);
+            }
+            
+            for(Integer order: orderIDList)
+                System.out.println("distributedapp.DistributedApp.main(): "
+                        + "Order state: "
+                        + provider.getState(order));
+            
+            //String providerAnswer = provider.getProvider(10, "Timisoara");
             
             System.out.println("distributedapp.DistributedApp.main(): "
                     + "Message sent to provider: " + providerAnswer);
