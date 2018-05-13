@@ -23,12 +23,14 @@ public class MySQLJDBCSelect {
     }
     
     public ArrayList<String> selectUser(String username){
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUser(): "
+                + "User data is ready to be selected from database...");
         
         ArrayList<String> array =  new ArrayList<String>();
         
         ResultSet rs = null;
         
-        String sql = "SELECT * FROM user WHERE username = ?";
+        String sql = "SELECT * FROM user WHERE username =?";
         
         System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUser(): "
                 + sql);
@@ -36,32 +38,17 @@ public class MySQLJDBCSelect {
         try (Connection conn = MySQLJDBCUtil.getConnection();
             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
            
-            System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUser()"
+            System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUser(): "
                     + "Connected");
             
             pstmt.setString(1, username);
             
-            rs    = pstmt.executeQuery(sql);
+            rs    = pstmt.executeQuery();
             
             if (rs.next()) {
-                /*
-                array.add(rs.getString("first_name"));
-                array.add(rs.getString("last_name"));
-                array.add(rs.getString("email"));
+                array.add(rs.getString("id"));
                 array.add(rs.getString("username"));
-                array.add(rs.getString("password"));
-                array.add(rs.getString("number"));
-                array.add(rs.getString("address"));
-                array.add(rs.getString("country"));
-                array.add(rs.getString("zipcode"));
-                array.add(String.valueOf(rs.getDate("birth")));
-*/
-                System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectUser(): "
-                        + rs.getString(1));
-                
-                array.add(rs.getString(1));
-                array.add(rs.getString(2));
-                array.add(rs.getString(3));
+                array.add(rs.getString("first_name"));
                 array.add(rs.getString(4));
                 array.add(rs.getString(5));
                 array.add(rs.getString(6));
@@ -70,7 +57,6 @@ public class MySQLJDBCSelect {
                 array.add(rs.getString(9));
                 array.add(rs.getString(10));
                 array.add(String.valueOf(rs.getDate(11)));
-                    
             }
         } catch (SQLException ex) {
             System.out.println(ex.getMessage());
@@ -90,7 +76,7 @@ public class MySQLJDBCSelect {
     
     public String selectFirstName(String username, String password){
         
-        String sql = "SELECT first_name FROM user WHERE username = ? AND password = ?";
+        String sql = "SELECT first_name FROM user WHERE username=? AND password=?";
         
         ResultSet rs = null;
         
@@ -102,10 +88,13 @@ public class MySQLJDBCSelect {
         try (Connection conn = MySQLJDBCUtil.getConnection();
             PreparedStatement pstmt  = conn.prepareStatement(sql)) {
             
+            System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectFirstName(): "
+                    + "Connected to database");
+            
             pstmt.setString(1, username);
             pstmt.setString(2, password);
             
-            rs    = pstmt.executeQuery(sql);
+            rs    = pstmt.executeQuery();
             
             if(rs.next())
                 first_name = rs.getString("first_name");
@@ -129,7 +118,7 @@ public class MySQLJDBCSelect {
         ResultSet rs = null;
         
         System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.getUserId(): "
-                + sql);;
+                + sql);
         
         int id = 0;
         
@@ -138,7 +127,7 @@ public class MySQLJDBCSelect {
             
             pstmt.setString(1, username);
             
-            rs    = pstmt.executeQuery(sql);
+            rs    = pstmt.executeQuery();
             
             if(rs.next())
                 id = rs.getInt("id");
