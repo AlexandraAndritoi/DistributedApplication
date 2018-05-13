@@ -39,6 +39,10 @@ public class ServerManager extends UnicastRemoteObject
 
     @Override
     public ArrayList<String> getUser(String username) throws RemoteException {
+        
+        System.out.println("distributedapp.servermanager.ServerManager.getUser(): "
+                + "Client is asking for user data...");
+        
         MySQLJDBCSelect selectionObject = MySQLJDBCSelect.getMySQLJDBCSelect();
         
         return selectionObject.selectUser(username);
@@ -68,7 +72,7 @@ public class ServerManager extends UnicastRemoteObject
     }
 
     @Override
-    public void sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) 
+    public String sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) 
         throws RemoteException {
         System.out.println("distributedapp.servermanager.ServerManager.sendCart(): "
                 + "Cart received...");
@@ -76,6 +80,11 @@ public class ServerManager extends UnicastRemoteObject
                 + cart.get(0).getTitle());
         System.out.println("distributedapp.servermanager.ServerManager.sendCart(): "
                 + cart.size());
+        
+        MySQLJDBCInsert insertObject = MySQLJDBCInsert.getMySQLJDBCInsert();
+        
+        return insertObject.insertCart(username, cart, totalPrice);
+        
     }
 
     @Override

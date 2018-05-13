@@ -8,12 +8,10 @@ package distributedapp;
 import distributedapp.databasemanager.MySQLJDBCUtil;
 import distributedapp.servermanager.ServerManager;
 import distributedapp.servermanager.interfaces.ServerManagerInterface;
-import java.rmi.Naming;
 import java.rmi.RMISecurityManager;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
@@ -52,7 +50,6 @@ public class DistributedApp {
             LocateRegistry.createRegistry(1099);
             Registry registry = LocateRegistry.getRegistry();
 	    registry.bind("ServerManagerInterface", server);
-            //Naming.rebind("//localhost/ServerManagerInterface", server);
             
             System.out.println("distributedapp.DistributedApp.main() "
                     + "Server is ready to listen...");

@@ -24,7 +24,7 @@ public interface ServerManagerInterface extends Remote {
     
     public String updateUser(User user) throws RemoteException;
     
-    public void sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) throws RemoteException;
+    public String sendCart(String username, ArrayList<CartItemBean> cart, double totalPrice) throws RemoteException;
     
     public void sendMessage(String s) throws RemoteException;
     

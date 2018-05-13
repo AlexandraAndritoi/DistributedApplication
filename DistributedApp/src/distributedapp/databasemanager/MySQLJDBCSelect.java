@@ -145,6 +145,81 @@ public class MySQLJDBCSelect {
         return id;
     }
     
+    public int selectProductID(String productName){
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectProductID(): "
+                + "Ready to select product id...");
+        
+        String sql = "SELECT id FROM product WHERE  name= ?";
+        
+        ResultSet rs = null;
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectProductID(): "
+                + sql);
+        
+        int productID = 0;
+        
+        try (Connection conn = MySQLJDBCUtil.getConnection();
+            PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, productName);
+            
+            rs    = pstmt.executeQuery();
+            
+            if(rs.next())
+                productID = rs.getInt("id");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally{
+            try{
+                if(rs != null)  rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectProductID(): "
+                + "product ID: " + productID);
+        
+        return productID;
+    }
+    
+    public int selectProductStock(int productID){
+        String sql = "SELECT stock FROM product WHERE  id=?";
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectProductStock(): "
+                + "product ID: " + productID);
+        
+        ResultSet rs = null;
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.selectProductStock(): "
+                + sql);
+        
+        int stock = 0;
+        
+        try (Connection conn = MySQLJDBCUtil.getConnection();
+            PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+            
+            pstmt.setInt(1, productID);
+            
+            rs    = pstmt.executeQuery();
+            
+            if(rs.next())
+                stock = rs.getInt("stock");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally{
+            try{
+                if(rs != null)  rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return stock;
+    }
+    
     public static MySQLJDBCSelect getMySQLJDBCSelect(){
         if(selectionObject == null)
             selectionObject =  new MySQLJDBCSelect();
