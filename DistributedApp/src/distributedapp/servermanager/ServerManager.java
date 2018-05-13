@@ -7,6 +7,7 @@ package distributedapp.servermanager;
 
 import distributedapp.databasemanager.MySQLJDBCInsert;
 import distributedapp.databasemanager.MySQLJDBCSelect;
+import distributedapp.databasemanager.MySQLJDBCUpdate;
 import distributedapp.servermanager.interfaces.CartItemBean;
 import distributedapp.servermanager.interfaces.ServerManagerInterface;
 import distributedapp.servermanager.interfaces.User;
@@ -61,7 +62,9 @@ public class ServerManager extends UnicastRemoteObject
         System.out.println("distributedapp.servermanager.ServerManager.updateUser(): "
                 + user.getFirstName());
         
-        return "Updated User";
+        MySQLJDBCUpdate updatingObject = MySQLJDBCUpdate.getMySQLJDBCUpdate();
+        
+        return updatingObject.updateUser(user);
     }
 
     @Override
