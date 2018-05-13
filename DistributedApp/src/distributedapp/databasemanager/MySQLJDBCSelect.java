@@ -123,6 +123,39 @@ public class MySQLJDBCSelect {
         return first_name;
     }
     
+    public int getUserId(String username){
+        String sql = "SELECT id FROM user WHERE username = ?";
+        
+        ResultSet rs = null;
+        
+        System.out.println("distributedapp.databasemanager.MySQLJDBCSelect.getUserId(): "
+                + sql);;
+        
+        int id = 0;
+        
+        try (Connection conn = MySQLJDBCUtil.getConnection();
+            PreparedStatement pstmt  = conn.prepareStatement(sql)) {
+            
+            pstmt.setString(1, username);
+            
+            rs    = pstmt.executeQuery(sql);
+            
+            if(rs.next())
+                id = rs.getInt("id");
+            
+        } catch (SQLException ex) {
+            System.out.println(ex.getMessage());
+        } finally{
+            try{
+                if(rs != null)  rs.close();
+            } catch (SQLException e) {
+                System.out.println(e.getMessage());
+            }
+        }
+        
+        return id;
+    }
+    
     public static MySQLJDBCSelect getMySQLJDBCSelect(){
         if(selectionObject == null)
             selectionObject =  new MySQLJDBCSelect();
