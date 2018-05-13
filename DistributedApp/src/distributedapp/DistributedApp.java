@@ -5,6 +5,7 @@
  */
 package distributedapp;
 
+import ServerSide.GetProvider;
 import distributedapp.databasemanager.MySQLJDBCUtil;
 import distributedapp.servermanager.ServerManager;
 import distributedapp.servermanager.interfaces.ServerManagerInterface;
@@ -14,6 +15,7 @@ import java.rmi.registry.Registry;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.rmi.*;
 
 /**
  *
@@ -56,6 +58,27 @@ public class DistributedApp {
             
         }catch(Exception e){
             System.err.println("Server Manager Error: " + e.getMessage());
+        }
+        
+        try{
+            Registry reg = LocateRegistry.getRegistry("192.168.100.12");
+            
+            System.out.println("distributedapp.DistributedApp.main(): "
+                    + "Registry ok...");
+            
+            GetProvider provider = (GetProvider) reg.lookup("GetProvider");
+            
+            System.out.println("distributedapp.DistributedApp.main(): "
+                    + "Provider ok...");
+            
+            String providerAnswer = provider.getProvider(10, "Timisoara");
+            
+            System.out.println("distributedapp.DistributedApp.main(): "
+                    + "Message sent to provider: " + providerAnswer);
+            
+        } catch(Exception e) {
+            System.out.println("distributedapp.DistributedApp.main(): ERROR: "
+                    + e.getMessage());
         }
     }
 }
