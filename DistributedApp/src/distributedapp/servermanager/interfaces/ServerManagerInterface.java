@@ -17,7 +17,7 @@ public interface ServerManagerInterface extends Remote {
     
     public void insertUser(User user) throws RemoteException;
     
-    public User getUser(String username) throws RemoteException;
+    public ArrayList<String> getUser(String username) throws RemoteException;
     
     public String getFirstName(String username, String password) 
             throws RemoteException;

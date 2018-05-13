@@ -37,8 +37,10 @@ public class ServerManager extends UnicastRemoteObject
     }
 
     @Override
-    public User getUser(String username) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); 
+    public ArrayList<String> getUser(String username) throws RemoteException {
+        MySQLJDBCSelect selectionObject = MySQLJDBCSelect.getMySQLJDBCSelect();
+        
+        return selectionObject.selectUser(username);
     }
     
     @Override
@@ -49,7 +51,7 @@ public class ServerManager extends UnicastRemoteObject
         System.out.println("distributedapp.servermanager.ServerManager.getFirstName()"
                 + "Request from client received...");
         
-        return selectionObject.selectFirstName();
+        return selectionObject.selectFirstName(username, password);
     }
 
     @Override
